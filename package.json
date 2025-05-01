@@ -2,6 +2,10 @@
   "name": "global-go-tasks",
   "displayName": "global-go-tasks",
   "publisher": "rpolnx",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:rpolnx/global-go-tasks.git"
+  },
   "description": "",
   "version": "0.0.1",
   "engines": {
