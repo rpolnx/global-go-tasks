@@ -9,13 +9,20 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onCommand:globalGoTasks.genGoTestifyTestsFile",
+    "onCommand:globalGoTasks.genGoTestifyTestsFunc"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "global-go-tasks.helloWorld",
-        "title": "Hello World"
+        "command": "globalGoTasks.genGoTestifyTestsFile",
+        "title": "Go: Generate Testify Unit Tests For File"
+      },
+      {
+        "command": "globalGoTasks.genGoTestifyTestsFunc",
+        "title": "Go: Generate Testify Unit Tests For Function"
       }
     ]
   },
