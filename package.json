@@ -1,6 +1,7 @@
 {
   "name": "global-go-tasks",
   "displayName": "global-go-tasks",
+  "publisher": "rpolnx",
   "description": "",
   "version": "0.0.1",
   "engines": {
