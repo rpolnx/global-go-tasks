@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { getFileLines, exec } from "./helpers";
+import { getFileLines, waitForFile, getTestFilePath, exec } from "./helpers";
 
 export const goTestifyFile = async () => {
   const editor = vscode.window.activeTextEditor;
@@ -8,11 +8,13 @@ export const goTestifyFile = async () => {
   }
 
   const filePath = editor.document.uri.fsPath;
+  const testFilePath = getTestFilePath(filePath);
   const beforeLines = getFileLines(filePath);
   const cmd = `gotests -w -all -template testify "${filePath}"`;
 
   try {
     await exec(cmd);
+    await waitForFile(testFilePath);
     const afterLines = getFileLines(filePath);
     const start = new vscode.Position(beforeLines.length, 0);
     const end = new vscode.Position(afterLines.length, 0);
@@ -33,4 +35,3 @@ export const goTestifyFile = async () => {
     vscode.window.showErrorMessage(`Error: ${err.stderr || err.message}`);
   }
 };
-

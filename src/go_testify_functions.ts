@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { getFileLines, getTestFilePath, exec } from "./helpers";
+import { getFileLines, getTestFilePath, waitForFile, exec } from "./helpers";
 
 export const goTestifyFunction = async () => {
   const editor = vscode.window.activeTextEditor;
@@ -37,6 +37,7 @@ export const goTestifyFunction = async () => {
 
   try {
     await exec(cmd);
+    await waitForFile(testFilePath); 
     const afterLines = getFileLines(testFilePath);
     const start = new vscode.Position(beforeLines.length, 0);
     const end = new vscode.Position(afterLines.length, 0);

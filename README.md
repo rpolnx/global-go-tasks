@@ -25,6 +25,9 @@ No at the moment
 
 Users appreciate release notes as you update your extension.
 
+### 0.0.3
+- Small bug related to not waiting file to be created
+
 ### 0.0.2
 - Refactor & fix for receivers
 
