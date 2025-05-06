@@ -8,7 +8,8 @@ Allow creation of tests via vs code for testify
 
 ## Requirements
 
-Need to have a project that uses testify and gotests
+Need to have a project that uses testify and gotests. Also, you need to have template from gotests testify installed under
+- ~/.gotests/templates/testify
 
 ## Extension Settings
 This extension contributes the following settings:
@@ -24,8 +25,10 @@ No at the moment
 
 Users appreciate release notes as you update your extension.
 
-### 0.0.1
+### 0.0.2
+- Refactor & fix for receivers
 
-Just a simple tests
+### 0.0.1
+- Initial version
 
 ---
