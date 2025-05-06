@@ -6,6 +6,14 @@ This is an extension to use gotests using testify templates
 
 Allow creation of tests via vs code for testify
 
+## Package
+```
+npm run compile
+vsce package
+VERSION=0.0.4
+code --install-extension global-go-tasks-$VERSION.vsix
+```
+
 ## Requirements
 
 Need to have a project that uses testify and gotests. Also, you need to have template from gotests testify installed under

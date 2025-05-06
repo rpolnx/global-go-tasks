@@ -19,21 +19,20 @@ function getTestFilePath(originalPath: string): string {
 
 const exec = promisify(execCb);
 
-function waitForFile(filePath: string, retries = 10, delay = 100): Promise<void> {
-  return new Promise((resolve, reject) => {
-    const check = () => {
-      fs.access(filePath, fs.constants.F_OK, (err) => {
-        if (!err) return resolve();
-        if (retries <= 0) return reject(new Error(`File not found: ${filePath}`));
-        setTimeout(() => {
-          retries--;
-          check();
-        }, delay);
-      });
-    };
-    check();
-  });
+async function waitForFile(
+  filePath: string,
+  retries = 10,
+  delay = 100
+): Promise<void> {
+  for (let i = 0; i < retries; i++) {
+    try {
+      await fs.promises.access(filePath, fs.constants.F_OK);
+      return;
+    } catch {
+      await new Promise((res) => setTimeout(res, delay));
+    }
+  }
+  throw new Error(`File not found: ${filePath}`);
 }
-
 
 export { getFileLines, getTestFilePath, exec, waitForFile };

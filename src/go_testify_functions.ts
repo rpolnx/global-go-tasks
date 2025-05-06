@@ -19,7 +19,7 @@ export const goTestifyFunction = async () => {
   if (match) {
     const receiverVar = match[1];
     const method = match[2];
-    funcName = receiverVar ? `${receiverVar}_${method}` : method;
+    funcName = method;
   }
 
   if (!funcName) {
@@ -37,7 +37,7 @@ export const goTestifyFunction = async () => {
 
   try {
     await exec(cmd);
-    await waitForFile(testFilePath); 
+    await waitForFile(testFilePath);
     const afterLines = getFileLines(testFilePath);
     const start = new vscode.Position(beforeLines.length, 0);
     const end = new vscode.Position(afterLines.length, 0);
@@ -55,7 +55,11 @@ export const goTestifyFunction = async () => {
       `Testify test for '${funcName}' generated and highlighted.`
     );
   } catch (err: any) {
+    if (err.message?.includes("File not found")) {
+      return vscode.window.showWarningMessage(
+        `gotests did not create the test file. Possible causes:\n- Function '${funcName}' not found\n- Template error\n- gotests failed silently`
+      );
+    }
     vscode.window.showErrorMessage(`Error: ${err.stderr || err.message}`);
   }
 };
-
